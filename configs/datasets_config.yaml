@@ -1,0 +1,102 @@
+datasets:
+
+  EVEE:
+    Note: "EV Energy Efficiency Dataset"
+    file_path: "../data/processed/EV Energy Efficiency Dataset.csv"
+    num_start_idx: 0
+    num_end_idx: 2
+    cat_end_idx: 4
+    feature_weights: [0.03656963, 0.39483491, 0.10824414, 0.19927745, 0.26107387]
+
+  IHDP:
+    Note: "IHDP (Infant Health and Development Program) Dataset"
+    file_path: "../data/processed/IHDP data.csv"
+    num_start_idx: 0
+    num_end_idx: 5
+    cat_end_idx: 25
+    feature_weights: [0.04220661, 0.0198027,  0.01437713, 0.04491105, 0.03760062, 0.22749674, 0.40214488, 0.00638185,
+      0.00593593, 0.00839237, 0.00521591, 0.01347569, 0.0081398,  0.00933915, 0.0078298, 0.07685514, 0.00257104,
+      0.01382028, 0.00120708, 0.0042772,  0.01256932, 0.00829811, 0.00210357, 0.00254338, 0.00952302, 0.01298172]
+
+  MHR:
+    Note: "Mental Health Risk Prediction Dataset"
+    file_path: "../data/processed/mental_health_risk_dataset .csv"
+    num_start_idx: 0
+    num_end_idx: 15
+    cat_end_idx: 23
+    feature_weights: [0.0005232, 0.1509694, 0.0382291, 0.0007174, 0.0723232, 0.0746739, 0.0002742, 0.0003221,
+      0.0754714, 0.0005282, 0.1576794, 0.1572339, 0.0003862, 0.0003598, 0.0002593, 0.0001339, 0.0002266, 0.0001034,
+      0.0001009, 0.1840914, 0.0850094, 0.0000459, 0.0001382, 0.0001998]
+
+  OBES:
+    Note: "Obesity Level Estimation Dataset"
+    file_path: "../data/processed/ObesityDataSet_raw_and_data_sinthetic.csv"
+    num_start_idx: 0
+    num_end_idx: 7
+    cat_end_idx: 15
+    feature_weights: [0.03530446, 0.2061291,  0.54342675, 0.01118245, 0.00844941, 0.01094589, 0.01023365, 0.02270421,
+      0.01872758, 0.00376334, 0.00572881, 0.00156783, 0.00297098, 0.09973918, 0.00440967, 0.01471669]
+
+  ROSS:
+    Note: "Rossman Store Sales Dataset"
+    file_path: "../data/processed/rossman-store-sales.csv"
+    num_start_idx: 0
+    num_end_idx: 5
+    cat_end_idx: 11
+    feature_weights: [0.0282175, 0.025306761, 0.019873761, 0.0201119, 0.607145369, 0.056088064, 0.000127895,
+      0.008641257, 0.069509506, 0.063230231, 0.097506441, 0.004241285]
+
+  LAQ:
+    Note: "London Air Quality Dataset"
+    file_path: "../data/processed/London_Air_Quality.csv"
+    num_start_idx: 0
+    num_end_idx: 8
+    cat_end_idx: None
+    feature_weights: [0.048784442, 0.068185724, 0.142368942, 0.029435227, 0.047256723, 0.017488843, 0.320857674,
+      0.270910442, 0.054712001]
+
+  SCD:
+    Note: "Superconductivity Dataset"
+    file_path: "../data/processed/superconductivty_data_5000.csv"
+    num_start_idx: 0
+    num_end_idx: 80
+    cat_end_idx: None
+    feature_weights_path: "../data/feature_weights/super_conductivty_data_feature_weights.csv"
+    feature_weights: []
+
+  MN1B:
+    Note: "MOFs Nitrogen Adsorption at 1 Bar Dataset"
+    file_path: "../data/processed/MOFs_N2_1BAR.csv"
+    num_start_idx: 0
+    num_end_idx: 11
+    cat_end_idx: None
+    feature_weights: [0.073283434, 0.26273489, 0.076311775, 0.099720284, 0.09452188, 0.0331553, 0.09713044, 0.075906247,
+      0.027217157, 0.02890804, 0.044374634, 0.086735837]
+
+  ATRIV:
+    Note: "Acute Toxicity in Rats (Intravenous LD50)"
+    file_path: "../data/processed/Acute Toxicity_rat_intravenous_LD50.csv"
+    num_start_idx: 0
+    num_end_idx: 8
+    cat_end_idx: 1032
+    feature_weights_path: "../data/feature_weights/Acute Toxicity_rat_intravenous_LD50_feature_weights.csv"
+    feature_weights: []
+
+  DRGD:
+    Note: "Diabetic Retinopathy Grading Dataset"
+    file_path: "../data/processed/Diabetic Retinopathy.csv"
+    num_start_idx: 0
+    num_end_idx: 73
+    cat_end_idx: None
+    feature_weights_path: "../data/feature_weights/Diabetic Retinopathy_feature_weights.csv"
+    feature_weights: []
+
+  PAIN:
+    Note: "Pain prediction dataset"
+    file_path: "../data/processed/Application_case_train_P011_P200.csv"
+    file_path_exploring_k: "../data/processed/Application_case_exploring_k_P011_P040.csv"
+    file_path_task: "../data/processed/Application_case_task_P001_P010.csv"
+    num_start_idx: 0
+    num_end_idx: 6
+    cat_end_idx: None
+    feature_weights: [0.020804876, 0.020330146, 0.020003606, 0.59147507, 0.2098362, 0.062149666, 0.075400412]

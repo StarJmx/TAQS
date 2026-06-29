@@ -1,0 +1,51 @@
+font:
+  family: serif
+  serif: Times New Roman
+  size: 10
+
+axes:
+  labelsize: 10
+  titlesize: 11
+  linewidth: 0.8
+  grid: true
+
+ticks:
+  xtick_labelsize: 9
+  ytick_labelsize: 9
+
+legend:
+  fontsize: 9
+  frameon: false
+
+figure:
+  figsize: [3.5, 2.5]
+
+lines:
+  linewidth: 1.8
+  markersize: 5
+
+grid:
+  linestyle: "--"
+  linewidth: 0.5
+
+savefig:
+  dpi: 300
+  bbox: tight
+  pad_inches: 0.02
+
+plot_train_test_curve:
+  figsize: [3.5, 3.2]
+  dpi: 1000
+  markers: ['o', '>', '^', 'v', '*', 's', 'D']
+  marker: "o"
+  scatter_size: 3
+  line_width: 1
+  train_scatter_color: "green"
+  test_scatter_color: "#d62728"
+  train_line_color: "#4099a0" # darkgreen
+  test_line_color: "#d62728" # #d62728
+  minor_grid_linestyle: "--"
+  minor_grid_linewidth: 0.1
+  minor_grid_alpha: 0.3
+  xlabel_pad: 2
+  fontsize: 12
