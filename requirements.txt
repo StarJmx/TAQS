@@ -27,5 +27,8 @@ umap-learn>=0.5.0
 # Progress bars
 tqdm>=4.65.0
 
+# Web demo
+flask>=2.3.0
+
 # Computer vision (optional)
 opencv-python>=4.8.0

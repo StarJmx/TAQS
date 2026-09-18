@@ -1,5 +1,5 @@
 """
-Practical workflow.py
+practical workflow.py
 
 Application demo on the PAIN dataset:
 - exploring_k(): sweep neighbor count K with blocked CV on an exploring split
