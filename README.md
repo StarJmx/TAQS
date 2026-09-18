@@ -26,7 +26,7 @@ TAQS/
 │   ├── validation_taqs_paradigm.py # Main experiment pipeline of TAQS
 │   └── other/                  # Additional analysis scripts
 ├── data/                 # Data directory (not included in repo)
-│   ├── feature_weights/  # Weight of high-dimensional dataset (not included in repo)
+│   ├── feature_weights/  # Weight of high-dimensional dataset
 │   ├── raw/              # Original datasets (not included in repo)
 │   └── processed/        # Preprocessed datasets
 ├── results/              # Experimental results (generated during execution)
