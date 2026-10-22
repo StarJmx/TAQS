@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAQS</title>
+    <link rel="icon" type="image/png" href="../TAQS_logo.png">
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Inter,Arial,sans-serif;
+background:#f7f9fc;
+color:#1f2937;
+overflow:auto;
+}
+canvas#bg{
+position:fixed;
+inset:0;
+z-index:-1;
+}
+header{
+padding:28px;
+text-align:center;
+background:white;
+border-bottom:1px solid #e5e7eb;
+position:sticky;
+top:0;
+z-index:10;
+}
+header h1{margin:0;color:#1e3a8a}
+.subtitle{margin-top:8px;color:#6b7280}
+
+.container{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+padding:24px;
+max-width:1500px;
+margin:auto;
+}
+
+.panel{
+background:white;
+border-radius:18px;
+padding:20px;
+box-shadow:0 4px 20px rgba(0,0,0,.08);
+min-height:380px;
+overflow:hidden;
+}
+
+h2{
+margin-top:0;
+color:#111827;
+}
+
+.slider{width:100%}
+
+.node{
+display:inline-block;
+padding:8px 14px;
+margin:5px;
+border-radius:999px;
+font-weight:600;
+}
+
+.red{background:#ffd6de;color:#b91c1c}
+.blue{background:#dbeafe;color:#1d4ed8}
+.green{background:#dcfce7;color:#15803d}
+
+canvas{
+max-width:100%;
+border-radius:12px;
+}
+
+footer{
+padding:30px;
+text-align:center;
+color:#6b7280;
+}
+
+@media(max-width:1000px){
+.container{
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<header>
+<h1>TAQS</h1>
+<div class="subtitle">
+Knowledge-Prior Similarity → Task-Guided Alignment → Data-Driven Neighborhood Aggregation
+</div>
+</header>
+
+<div class="container">
+
+<div class="panel">
+<h2>Interactive Neighborhood Aggregation</h2>
+<p>Adjust neighborhood size (k)</p>
+<input id="k" class="slider" type="range" min="1" max="30" value="7">
+<p><b>Neighborhood Size:</b> <span id="kv">7</span></p>
+<canvas id="scene" width="650" height="320"></canvas>
+</div>
+
+<div class="panel">
+<h2>TAWG Similarity Mechanism</h2>
+
+<div class="node green">Knowledge Prior</div>
+<div class="node blue">Magnitude-aware</div>
+<div class="node red">Equality-aware</div>
+
+<p>
+TAWG integrates weighted numeric similarity and categorical similarity,
+allowing domain knowledge to directly influence neighborhood retrieval.
+</p>
+
+<h3>Relevance–Diversity Trade-off</h3>
+<canvas id="curve" width="650" height="260"></canvas>
+</div>
+
+<div class="panel">
+<h2>Task-domain Alignment</h2>
+
+<p>
+Gray = Full Dataset |
+Red = Task Set |
+Blue = TAQS Subset
+</p>
+
+<canvas id="umap" width="650" height="320"></canvas>
+</div>
+
+<div class="panel">
+<h2>TAQS Framework Overview</h2>
+
+<ol>
+<li>Task Set Construction</li>
+<li>Knowledge-aware Similarity Computation</li>
+<li>Neighborhood Aggregation</li>
+<li>Task-aligned Subset Formation</li>
+<li>Model Training</li>
+<li>Performance Improvement</li>
+</ol>
+
+<p>
+TAQS bridges the gap between feature-space similarity and downstream task requirements through query-anchored data selection.
+</p>
+</div>
+
+</div>
+
+<footer>
+TAQS • Interactive Demonstration V1.1
+</footer>
+
+<script>
+const bg=document.getElementById("bg");
+const bctx=bg.getContext("2d");
+
+function resize(){
+bg.width=window.innerWidth;
+bg.height=window.innerHeight;
+}
+resize();
+window.addEventListener("resize",resize);
+
+let particles=[...Array(120)].map(()=>({
+x:Math.random()*innerWidth,
+y:Math.random()*innerHeight,
+r:Math.random()*2+1
+}));
+
+function animateBg(){
+bctx.clearRect(0,0,bg.width,bg.height);
+
+particles.forEach(p=>{
+bctx.fillStyle="rgba(30,58,138,0.12)";
+bctx.beginPath();
+bctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+bctx.fill();
+
+p.y+=0.15;
+if(p.y>innerHeight)p.y=0;
+});
+
+requestAnimationFrame(animateBg);
+}
+animateBg();
+
+const scene=document.getElementById("scene");
+const sctx=scene.getContext("2d");
+
+const tasks=[...Array(8)].map(()=>({
+x:180+Math.random()*150,
+y:80+Math.random()*150
+}));
+
+const points=[...Array(140)].map(()=>({
+x:Math.random()*650,
+y:Math.random()*320
+}));
+
+function drawScene(){
+const k=+document.getElementById("k").value;
+document.getElementById("kv").innerText=k;
+
+sctx.clearRect(0,0,650,320);
+
+points.forEach(p=>{
+sctx.fillStyle="#93c5fd";
+sctx.beginPath();
+sctx.arc(p.x,p.y,3,0,Math.PI*2);
+sctx.fill();
+});
+
+tasks.forEach(t=>{
+
+sctx.fillStyle="#ef4444";
+sctx.beginPath();
+sctx.arc(t.x,t.y,6,0,Math.PI*2);
+sctx.fill();
+
+const near=[...points].sort((a,b)=>
+((a.x-t.x)**2+(a.y-t.y)**2)-
+((b.x-t.x)**2+(b.y-t.y)**2)
+).slice(0,k);
+
+near.forEach(n=>{
+sctx.strokeStyle="rgba(34,197,94,0.25)";
+sctx.beginPath();
+sctx.moveTo(t.x,t.y);
+sctx.lineTo(n.x,n.y);
+sctx.stroke();
+});
+});
+
+requestAnimationFrame(drawScene);
+}
+drawScene();
+
+const curve=document.getElementById("curve");
+const cctx=curve.getContext("2d");
+
+cctx.strokeStyle="#2563eb";
+cctx.lineWidth=3;
+
+cctx.beginPath();
+for(let x=0;x<500;x++){
+let y=190-Math.exp(-(x-220)*(x-220)/18000)*130;
+if(x===0)cctx.moveTo(50,y);
+else cctx.lineTo(50+x,y);
+}
+cctx.stroke();
+
+cctx.fillStyle="#111827";
+cctx.fillText("Optimal Region",240,40);
+
+const umap=document.getElementById("umap");
+const uctx=umap.getContext("2d");
+
+for(let i=0;i<300;i++){
+uctx.fillStyle="rgba(180,180,180,0.45)";
+uctx.beginPath();
+uctx.arc(Math.random()*650,Math.random()*320,2,0,Math.PI*2);
+uctx.fill();
+}
+
+for(let i=0;i<40;i++){
+uctx.fillStyle="#ef4444";
+uctx.beginPath();
+uctx.arc(240+Math.random()*120,100+Math.random()*80,3,0,Math.PI*2);
+uctx.fill();
+}
+
+for(let i=0;i<100;i++){
+uctx.fillStyle="#2563eb";
+uctx.beginPath();
+uctx.arc(210+Math.random()*170,80+Math.random()*130,3,0,Math.PI*2);
+uctx.fill();
+}
+</script>
+
+</body>
+</html>
